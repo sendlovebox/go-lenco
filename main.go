@@ -87,12 +87,54 @@ func main() {
 
 	*/
 
-	// ---------------GetProducts---------------
-	products, err := api.GetProducts(ctx, "", "")
+	/*
+		// ---------------GetProducts---------------
+		products, err := api.GetProducts(ctx, "", "")
+		if err != nil {
+			logger.Err(err).Msg("failed")
+			return
+		}
+		logger.Info().Interface("response", products).Msg("success")
+
+	*/
+
+	/*
+
+			// ---------------GetProductByID---------------
+		product, err := api.GetProductByID(ctx, "c96432f5-c5b7-4eb4-a42d-9b873f8f3ff1")
+		if err != nil {
+			logger.Err(err).Msg("failed")
+			return
+		}
+		logger.Info().Interface("response", product).Msg("success")
+
+	*/
+
+	/*
+
+
+			// ---------------RunCustomerLookup---------------
+		product, err := api.RunCustomerLookup(ctx, "10433749628", "96c548e4-02cb-4d25-a646-8d6489374a1e")
+		if err != nil {
+			logger.Err(err).Msg("failed")
+			return
+		}
+		logger.Info().Interface("response", product).Msg("success")
+
+	*/
+
+	// ---------------CreateBill---------------
+	bill, err := api.CreateBill(ctx, model.CreateBillRequest{
+		CustomerID:     "10433749628",
+		DebitAccountID: "431827e5-8f9f-4340-ad37-d07185403b8b",
+		ProductID:      "96c548e4-02cb-4d25-a646-8d6489374a1e",
+		Amount:         "100",
+		Reference:      "tvesgwhswt",
+	})
 	if err != nil {
 		logger.Err(err).Msg("failed")
 		return
 	}
-	logger.Info().Interface("response", products).Msg("success")
+	logger.Info().Interface("response", bill).Msg("success")
 
 }

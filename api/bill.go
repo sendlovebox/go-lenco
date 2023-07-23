@@ -3,22 +3,23 @@ package api
 import (
 	"context"
 	"fmt"
-	"net/http"
-	"strings"
-
 	"github.com/sendlovebox/go-lenco/model"
+	"net/http"
+	"net/url"
 )
 
-// GetVendors makes the request to get bill vendors
-func (c *Call) GetVendors(ctx context.Context, category string) (*[]model.Vendor, error) {
+// GetBillVendors makes the request to get bill vendors
+func (c *Call) GetBillVendors(ctx context.Context, category string) (*[]model.Vendor, error) {
 	response := &[]model.Vendor{}
+
 	path := "/bills/vendors"
 
-	if category != "" {
-		path = fmt.Sprintf("%s?categories[]=%s", path, category)
-	}
+	params := url.Values{}
+	params.Set("categories[]", category)
 
-	err := c.makeRequest(ctx, http.MethodGet, path, nil, response)
+	requestPath := fmt.Sprintf("%s?%s", path, params.Encode())
+
+	err := c.makeRequest(ctx, http.MethodGet, requestPath, nil, response)
 	if err != nil {
 		return nil, err
 	}
@@ -26,8 +27,8 @@ func (c *Call) GetVendors(ctx context.Context, category string) (*[]model.Vendor
 	return response, err
 }
 
-// GetVendorByID makes the request to get a bill vendor by its ID
-func (c *Call) GetVendorByID(ctx context.Context, vendorID string) (*model.Vendor, error) {
+// GetBillVendorByID makes the request to get a bill vendor by its ID
+func (c *Call) GetBillVendorByID(ctx context.Context, vendorID string) (*model.Vendor, error) {
 	response := &model.Vendor{}
 	path := fmt.Sprintf("/bills/vendors/%s", vendorID)
 
@@ -39,24 +40,24 @@ func (c *Call) GetVendorByID(ctx context.Context, vendorID string) (*model.Vendo
 	return response, err
 }
 
-// GetProducts makes the request to get products
-func (c *Call) GetProducts(ctx context.Context, vendorID string, category string) (*[]model.Product, error) {
+// GetBillProducts makes the request to get products
+func (c *Call) GetBillProducts(ctx context.Context, vendorID string, category string) (*[]model.Product, error) {
 	response := &[]model.Product{}
-	path := "/bills/products"
 
-	if category != "" {
-		path = fmt.Sprintf("%s?categories[]=%s", path, category)
-	}
+	path := "/bills/products"
+	params := url.Values{}
 
 	if vendorID != "" {
-		if strings.Contains(path, "?") {
-			path = fmt.Sprintf("%s&vendorIds[]=%s", path, vendorID)
-		} else {
-			path = fmt.Sprintf("%s?vendorIds[]=%s", path, vendorID)
-		}
+		params.Set("vendorIds[]", vendorID)
 	}
 
-	err := c.makeRequest(ctx, http.MethodGet, path, nil, response)
+	if category != "" {
+		params.Set("categories[]", category)
+	}
+
+	requestPath := fmt.Sprintf("%s?%s", path, params.Encode())
+
+	err := c.makeRequest(ctx, http.MethodGet, requestPath, nil, response)
 	if err != nil {
 		return nil, err
 	}
@@ -64,8 +65,8 @@ func (c *Call) GetProducts(ctx context.Context, vendorID string, category string
 	return response, err
 }
 
-// GetProductByID makes the request to get a product by its ID
-func (c *Call) GetProductByID(ctx context.Context, productID string) (*model.Product, error) {
+// GetBillProductByID makes the request to get a product by its ID
+func (c *Call) GetBillProductByID(ctx context.Context, productID string) (*model.Product, error) {
 	response := &model.Product{}
 	path := fmt.Sprintf("/bills/products/%s", productID)
 
@@ -141,43 +142,39 @@ func (c *Call) GetAllBills(ctx context.Context, request model.GetAllBillsRequest
 
 	path := "/bills"
 
-	if string(request.Category) != "" {
-		path = fmt.Sprintf("%s?categories[]=%s", path, request.Category)
-	}
+	params := url.Values{}
 
 	if request.VendorID != "" {
-		if strings.Contains(path, "?") {
-			path = fmt.Sprintf("%s&vendorIds[]=%s", path, request.VendorID)
-		} else {
-			path = fmt.Sprintf("%s?vendorIds[]=%s", path, request.VendorID)
-		}
+		params.Set("vendorIds[]", request.VendorID)
 	}
 
 	if request.CustomerID != "" {
-		if strings.Contains(path, "?") {
-			path = fmt.Sprintf("%s&customerId=%s", path, request.CustomerID)
-		} else {
-			path = fmt.Sprintf("%s?customerId=%s", path, request.CustomerID)
-		}
-	}
-
-	if request.ProductID != "" {
-		if strings.Contains(path, "?") {
-			path = fmt.Sprintf("%s&productId=%s", path, request.ProductID)
-		} else {
-			path = fmt.Sprintf("%s?productId=%s", path, request.ProductID)
-		}
+		params.Set("customerId", request.CustomerID)
 	}
 
 	if request.Status != "" {
-		if strings.Contains(path, "?") {
-			path = fmt.Sprintf("%s&status=%s", path, request.Status)
-		} else {
-			path = fmt.Sprintf("%s?status=%s", path, request.Status)
-		}
+		params.Set("status", request.Status)
 	}
 
-	err := c.makeRequest(ctx, http.MethodGet, path, nil, response)
+	if request.Category != "" {
+		params.Set("categories[]", string(request.Category))
+	}
+
+	if request.Page != "" {
+		params.Set("page", string(request.Page))
+	}
+
+	if request.Start != "" {
+		params.Set("start", string(request.Start))
+	}
+
+	if request.End != "" {
+		params.Set("end", string(request.End))
+	}
+
+	requestPath := fmt.Sprintf("%s?%s", path, params.Encode())
+
+	err := c.makeRequest(ctx, http.MethodGet, requestPath, nil, response)
 	if err != nil {
 		return nil, err
 	}

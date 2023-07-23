@@ -2,6 +2,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
 
@@ -21,7 +22,7 @@ func main() {
 	defer logger.Info().Msg("stopped")
 	api := apiCalls.New(&logger, client, model.BaseURL, model.APIKey)
 	api.RunInSandboxMode() // to ensure it is running in sandbox mode
-	//ctx := context.Background()
+	ctx := context.Background()
 
 	/*
 		// ---------------CreateVirtualAccount---------------
@@ -76,19 +77,8 @@ func main() {
 	*/
 
 	/*
-		// ---------------GetBillVendorByID---------------
-		vendor, err := api.GetBillVendorByID(ctx, "f46c9b9f-ddc1-4466-9cf2-dda59d18b84f")
-		if err != nil {
-			logger.Err(err).Msg("failed")
-			return
-		}
-		logger.Info().Interface("response", vendor).Msg("success")
-
-	*/
-
-	/*
-		// ---------------GetProducts---------------
-		products, err := api.GetProducts(ctx, "", "")
+		// ---------------GetBillProducts---------------
+		products, err := api.GetBillProducts(ctx, "", "")
 		if err != nil {
 			logger.Err(err).Msg("failed")
 			return
@@ -99,8 +89,8 @@ func main() {
 
 	/*
 
-			// ---------------GetProductByID---------------
-		product, err := api.GetProductByID(ctx, "c96432f5-c5b7-4eb4-a42d-9b873f8f3ff1")
+			// ---------------GetBillProductByID---------------
+		product, err := api.GetBillProductByID(ctx, "c96432f5-c5b7-4eb4-a42d-9b873f8f3ff1")
 		if err != nil {
 			logger.Err(err).Msg("failed")
 			return
@@ -158,12 +148,13 @@ func main() {
 	//logger.Info().Interface("response", bill).Msg("success")
 
 	// ---------------GetAllBills---------------
-	//bills, err := api.GetAllBills(ctx, model.GetAllBillsRequest{Status: "successful", VendorID: "bfa5206c-6122-448b-adfd-b8b764bfa13f", Category: "airtime"})
-	//
-	//if err != nil {
-	//	logger.Err(err).Msg("failed")
-	//	return
-	//}
-	//logger.Info().Interface("response", bills).Msg("success")
+	//YYYY-MM-DD
+	bills, err := api.GetAllBills(ctx, model.GetAllBillsRequest{Status: "successful", VendorID: "bfa5206c-6122-448b-adfd-b8b764bfa13f", Category: "cable-tv", Start: "2021-01-01", End: "2023-07-23"})
+
+	if err != nil {
+		logger.Err(err).Msg("failed")
+		return
+	}
+	logger.Info().Interface("response", bills).Msg("success")
 
 }

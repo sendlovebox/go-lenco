@@ -2,7 +2,6 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"os"
 
@@ -22,7 +21,7 @@ func main() {
 	defer logger.Info().Msg("stopped")
 	api := apiCalls.New(&logger, client, model.BaseURL, model.APIKey)
 	api.RunInSandboxMode() // to ensure it is running in sandbox mode
-	ctx := context.Background()
+	//ctx := context.Background()
 
 	/*
 		// ---------------CreateVirtualAccount---------------
@@ -123,18 +122,48 @@ func main() {
 
 	*/
 
-	// ---------------CreateBill---------------
-	bill, err := api.CreateBill(ctx, model.CreateBillRequest{
-		CustomerID:     "10433749628",
-		DebitAccountID: "431827e5-8f9f-4340-ad37-d07185403b8b",
-		ProductID:      "96c548e4-02cb-4d25-a646-8d6489374a1e",
-		Amount:         "100",
-		Reference:      "tvesgwhswt",
-	})
-	if err != nil {
-		logger.Err(err).Msg("failed")
-		return
-	}
-	logger.Info().Interface("response", bill).Msg("success")
+	/*
+
+			// ---------------CreateBill---------------
+		//bill, err := api.CreateBill(ctx, model.CreateBillRequest{
+		//	CustomerID:     "10433749628",
+		//	DebitAccountID: "431827e5-8f9f-4340-ad37-d07185403b8b",
+		//	ProductID:      "96c548e4-02cb-4d25-a646-8d6489374a1e",
+		//	Amount:         "100",
+		//	Reference:      "testReference",
+		//})
+		//if err != nil {
+		//	logger.Err(err).Msg("failed")
+		//	return
+		//}
+		//logger.Info().Interface("response", bill).Msg("success")
+
+	*/
+
+	// ---------------GetBillByID---------------
+
+	//bill, err := api.GetBillByID(ctx, "99267671-6377-427d-9142-698663a6e77b")
+	//if err != nil {
+	//	logger.Err(err).Msg("failed")
+	//	return
+	//}
+	//logger.Info().Interface("response", bill).Msg("success")
+
+	// ---------------GetBillByReference---------------
+	//bill, err := api.GetBillByReference(ctx, "testReference")
+	//if err != nil {
+	//	logger.Err(err).Msg("failed")
+	//	return
+	//}
+	//logger.Info().Interface("response", bill).Msg("success")
+
+	// ---------------GetAllBills---------------
+	//bills, err := api.GetAllBills(ctx, model.GetAllBillsRequest{Status: "successful", VendorID: "bfa5206c-6122-448b-adfd-b8b764bfa13f", Category: "airtime"})
+	//
+	//if err != nil {
+	//	logger.Err(err).Msg("failed")
+	//	return
+	//}
+	//logger.Info().Interface("response", bills).Msg("success")
 
 }

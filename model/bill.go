@@ -48,6 +48,14 @@ type (
 		Reference      string `json:"reference,omitempty"`
 	}
 
+	GetAllBillsRequest struct {
+		CustomerID string       `json:"customerId,omitempty"`
+		ProductID  string       `json:"productId,omitempty"`
+		VendorID   string       `json:"productId,omitempty"`
+		Status     string       `json:"status,omitempty"`
+		Category   BillCategory `json:"category,omitempty"`
+	}
+
 	CreateBillResponse struct {
 		Status  interface{} `mapstructure:"status,omitempty" json:"status,omitempty"`
 		Message string      `mapstructure:"message,omitempty" json:"message,omitempty"`

@@ -28,6 +28,9 @@ type RemoteCalls interface {
 	GetProductByID(ctx context.Context, productID string) (*model.Product, error)
 	RunCustomerLookup(ctx context.Context, customerID string, productID string) (*model.Product, error)
 	CreateBill(ctx context.Context, request model.CreateBillRequest) (*model.CreateBillResponse, error)
+	GetBillByID(ctx context.Context, id string) (*model.BillData, error)
+	GetBillByReference(ctx context.Context, reference string) (*model.BillData, error)
+	GetAllBills(ctx context.Context, request model.GetAllBillsRequest) (*[]model.BillData, error)
 }
 
 // Call object

@@ -103,3 +103,84 @@ func (c *Call) CreateBill(ctx context.Context, request model.CreateBillRequest) 
 
 	return response, err
 }
+
+// GetBillByID makes the request to get a specific bill
+func (c *Call) GetBillByID(ctx context.Context, id string) (*model.BillData, error) {
+
+	response := &model.BillData{}
+
+	path := fmt.Sprintf("/bills/%s", id)
+
+	err := c.makeRequest(ctx, http.MethodGet, path, nil, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, err
+}
+
+// GetBillByReference makes the request to get a specific bill
+func (c *Call) GetBillByReference(ctx context.Context, reference string) (*model.BillData, error) {
+
+	response := &model.BillData{}
+
+	path := fmt.Sprintf("/bills/by-reference/%s", reference)
+
+	err := c.makeRequest(ctx, http.MethodGet, path, nil, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, err
+}
+
+// GetAllBills makes the request to get all bills
+func (c *Call) GetAllBills(ctx context.Context, request model.GetAllBillsRequest) (*[]model.BillData, error) {
+
+	response := &[]model.BillData{}
+
+	path := "/bills"
+
+	if string(request.Category) != "" {
+		path = fmt.Sprintf("%s?categories[]=%s", path, request.Category)
+	}
+
+	if request.VendorID != "" {
+		if strings.Contains(path, "?") {
+			path = fmt.Sprintf("%s&vendorIds[]=%s", path, request.VendorID)
+		} else {
+			path = fmt.Sprintf("%s?vendorIds[]=%s", path, request.VendorID)
+		}
+	}
+
+	if request.CustomerID != "" {
+		if strings.Contains(path, "?") {
+			path = fmt.Sprintf("%s&customerId=%s", path, request.CustomerID)
+		} else {
+			path = fmt.Sprintf("%s?customerId=%s", path, request.CustomerID)
+		}
+	}
+
+	if request.ProductID != "" {
+		if strings.Contains(path, "?") {
+			path = fmt.Sprintf("%s&productId=%s", path, request.ProductID)
+		} else {
+			path = fmt.Sprintf("%s?productId=%s", path, request.ProductID)
+		}
+	}
+
+	if request.Status != "" {
+		if strings.Contains(path, "?") {
+			path = fmt.Sprintf("%s&status=%s", path, request.Status)
+		} else {
+			path = fmt.Sprintf("%s?status=%s", path, request.Status)
+		}
+	}
+
+	err := c.makeRequest(ctx, http.MethodGet, path, nil, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, err
+}

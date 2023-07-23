@@ -41,18 +41,18 @@ func (c *Call) GetBillVendorByID(ctx context.Context, vendorID string) (*model.V
 }
 
 // GetBillProducts makes the request to get products
-func (c *Call) GetBillProducts(ctx context.Context, vendorID string, category string) (*[]model.Product, error) {
+func (c *Call) GetBillProducts(ctx context.Context, vendorID, category *string) (*[]model.Product, error) {
 	response := &[]model.Product{}
 
 	path := "/bills/products"
 	params := url.Values{}
 
-	if vendorID != "" {
-		params.Set("vendorIds[]", vendorID)
+	if vendorID != nil {
+		params.Set("vendorIds[]", *vendorID)
 	}
 
-	if category != "" {
-		params.Set("categories[]", category)
+	if category != nil {
+		params.Set("categories[]", *category)
 	}
 
 	requestPath := fmt.Sprintf("%s?%s", path, params.Encode())
@@ -144,32 +144,36 @@ func (c *Call) GetAllBills(ctx context.Context, request model.GetAllBillsRequest
 
 	params := url.Values{}
 
-	if request.VendorID != "" {
-		params.Set("vendorIds[]", request.VendorID)
+	if request.VendorID != nil {
+		params.Set("vendorIds[]", *request.VendorID)
 	}
 
-	if request.CustomerID != "" {
-		params.Set("customerId", request.CustomerID)
+	if request.ProductID != nil {
+		params.Set("vendorIds[]", *request.VendorID)
 	}
 
-	if request.Status != "" {
-		params.Set("status", request.Status)
+	if request.CustomerID != nil {
+		params.Set("customerId", *request.CustomerID)
 	}
 
-	if request.Category != "" {
-		params.Set("categories[]", string(request.Category))
+	if request.Status != nil {
+		params.Set("status", *request.Status)
 	}
 
-	if request.Page != "" {
-		params.Set("page", string(request.Page))
+	if request.Category != nil {
+		params.Set("categories[]", string(*request.Category))
 	}
 
-	if request.Start != "" {
-		params.Set("start", string(request.Start))
+	if request.Page != nil {
+		params.Set("page", *request.Page)
 	}
 
-	if request.End != "" {
-		params.Set("end", string(request.End))
+	if request.Start != nil {
+		params.Set("start", *request.Start)
+	}
+
+	if request.End != nil {
+		params.Set("end", *request.End)
 	}
 
 	requestPath := fmt.Sprintf("%s?%s", path, params.Encode())

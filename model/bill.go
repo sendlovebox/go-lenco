@@ -49,14 +49,14 @@ type (
 	}
 
 	GetAllBillsRequest struct {
-		CustomerID string       `json:"customerId,omitempty"`
-		ProductID  string       `json:"productId,omitempty"`
-		VendorID   string       `json:"vendorId,omitempty"`
-		Status     string       `json:"status,omitempty"`
-		Category   BillCategory `json:"category,omitempty"`
-		Start      string       `json:"start,omitempty"`
-		End        string       `json:"end,omitempty"`
-		Page       string       `json:"page,omitempty"`
+		CustomerID *string       `json:"customerId,omitempty"`
+		ProductID  *string       `json:"productId,omitempty"`
+		VendorID   *string       `json:"vendorId,omitempty"`
+		Status     *string       `json:"status,omitempty"`
+		Category   *BillCategory `json:"category,omitempty"`
+		Start      *string       `json:"start,omitempty"`
+		End        *string       `json:"end,omitempty"`
+		Page       *string       `json:"page,omitempty"`
 	}
 
 	CreateBillResponse struct {

@@ -2,7 +2,6 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"os"
 
@@ -22,7 +21,7 @@ func main() {
 	defer logger.Info().Msg("stopped")
 	api := apiCalls.New(&logger, client, model.BaseURL, model.APIKey)
 	api.RunInSandboxMode() // to ensure it is running in sandbox mode
-	ctx := context.Background()
+	//ctx := context.Background()
 
 	/*
 		// ---------------CreateVirtualAccount---------------
@@ -149,12 +148,12 @@ func main() {
 
 	// ---------------GetAllBills---------------
 	//YYYY-MM-DD
-	bills, err := api.GetAllBills(ctx, model.GetAllBillsRequest{Status: "successful", VendorID: "bfa5206c-6122-448b-adfd-b8b764bfa13f", Category: "cable-tv", Start: "2021-01-01", End: "2023-07-23"})
-
-	if err != nil {
-		logger.Err(err).Msg("failed")
-		return
-	}
-	logger.Info().Interface("response", bills).Msg("success")
+	//bills, err := api.GetAllBills(ctx, model.GetAllBillsRequest{Status: "successful", VendorID: "bfa5206c-6122-448b-adfd-b8b764bfa13f", Category: "cable-tv", Start: "2021-01-01", End: "2023-07-23"})
+	//
+	//if err != nil {
+	//	logger.Err(err).Msg("failed")
+	//	return
+	//}
+	//logger.Info().Interface("response", bills).Msg("success")
 
 }

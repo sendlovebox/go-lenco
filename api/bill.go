@@ -3,9 +3,10 @@ package api
 import (
 	"context"
 	"fmt"
-	"github.com/sendlovebox/go-lenco/model"
 	"net/http"
 	"net/url"
+
+	"github.com/sendlovebox/go-lenco/model"
 )
 
 // GetBillVendors makes the request to get bill vendors

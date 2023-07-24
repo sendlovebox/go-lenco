@@ -27,3 +27,21 @@ type (
 		Data    interface{} `json:"data"`
 	}
 )
+
+//{
+//"id": "e0512abf-ecf4-48df-b6ff-40a8bf3b2373",
+//"name": "500GB Gold Monthly HyNetFlex Unlimited Plan  (4G Router)",
+//"vendor": {
+//"id": "70284a19-560d-430d-b1ef-a16fe9107d1f",
+//"name": "MTN"
+//},
+//"amount": {
+//"type": "fixed",
+//"fixed": "45000.00",
+//"minimum": null,
+//"maximum": null
+//},
+//"category": "mobile-data",
+//"customerIdLabel": "Mobile Number",
+//"commissionPercentage": "0.80"
+//},

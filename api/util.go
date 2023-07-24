@@ -7,8 +7,8 @@ import (
 	"net/http"
 
 	"github.com/go-resty/resty/v2"
-
 	"github.com/mitchellh/mapstructure"
+
 	"github.com/sendlovebox/go-lenco/model"
 )
 

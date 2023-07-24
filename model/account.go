@@ -43,9 +43,6 @@ type (
 		Bvn                  *string `mapstructure:"bvn,omitempty" json:"bvn"`
 		IsStatic             bool    `mapstructure:"isStatic,omitempty" json:"isStatic"`
 	}
-
-	// VirtualAccountType string representation of virtual account type
-	VirtualAccountType string
 )
 
 const (

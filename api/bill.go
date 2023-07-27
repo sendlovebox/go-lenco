@@ -10,13 +10,13 @@ import (
 )
 
 // GetBillVendors makes the request to get bill vendors
-func (c *Call) GetBillVendors(ctx context.Context, category string) ([]*model.Vendor, error) {
+func (c *Call) GetBillVendors(ctx context.Context, category model.BillCategory) ([]*model.Vendor, error) {
 	var response []*model.Vendor
 
 	path := "/bills/vendors"
 
 	params := url.Values{}
-	params.Set("categories[]", category)
+	params.Set("categories[]", string(category))
 
 	requestPath := fmt.Sprintf("%s?%s", path, params.Encode())
 
@@ -42,7 +42,7 @@ func (c *Call) GetBillVendorByID(ctx context.Context, vendorID string) (*model.V
 }
 
 // GetBillProducts makes the request to get products
-func (c *Call) GetBillProducts(ctx context.Context, vendorID, category *string) ([]*model.Product, error) {
+func (c *Call) GetBillProducts(ctx context.Context, vendorID *string, category *model.BillCategory) ([]*model.Product, error) {
 	var response []*model.Product
 
 	path := "/bills/products"
@@ -53,7 +53,7 @@ func (c *Call) GetBillProducts(ctx context.Context, vendorID, category *string) 
 	}
 
 	if category != nil {
-		params.Set("categories[]", *category)
+		params.Set("categories[]", string(*category))
 	}
 
 	requestPath := fmt.Sprintf("%s?%s", path, params.Encode())

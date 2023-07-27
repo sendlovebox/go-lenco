@@ -13,13 +13,13 @@ import (
 )
 
 // GetBillVendors makes the request to get bill vendors
-func (c *Call) GetBillVendors(ctx context.Context, category string) ([]model.Vendor, error) {
+func (c *Call) GetBillVendors(ctx context.Context, category model.BillCategory) ([]model.Vendor, error) {
 	response := &[]model.Vendor{}
 
 	path := "/bills/vendors"
 
 	params := url.Values{}
-	params.Set("categories[]", category)
+	params.Set("categories[]", string(category))
 
 	requestPath := fmt.Sprintf("%s?%s", path, params.Encode())
 
@@ -45,7 +45,7 @@ func (c *Call) GetBillVendorByID(ctx context.Context, vendorID string) (*model.V
 }
 
 // GetBillProducts makes the request to get products
-func (c *Call) GetBillProducts(ctx context.Context, vendorID, category *string) ([]model.Product, error) {
+func (c *Call) GetBillProducts(ctx context.Context, vendorID *string, category *model.BillCategory) ([]model.Product, error) {
 	response := &[]model.Product{}
 
 	path := "/bills/products"
@@ -56,7 +56,7 @@ func (c *Call) GetBillProducts(ctx context.Context, vendorID, category *string) 
 	}
 
 	if category != nil {
-		params.Set("categories[]", *category)
+		params.Set("categories[]", string(*category))
 	}
 
 	requestPath := fmt.Sprintf("%s?%s", path, params.Encode())
@@ -83,8 +83,8 @@ func (c *Call) GetBillProductByID(ctx context.Context, productID string) (*model
 }
 
 // RunCustomerLookup makes the request to run customer look up for a bill
-func (c *Call) RunCustomerLookup(ctx context.Context, customerID string, productID string) (*model.Product, error) {
-	response := &model.Product{}
+func (c *Call) RunCustomerLookup(ctx context.Context, customerID string, productID string) (*model.CustomerDetails, error) {
+	response := &model.CustomerDetails{}
 
 	path := fmt.Sprintf("/bills/lookup-account?customerId=%s&productId=%s", customerID, productID)
 

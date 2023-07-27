@@ -2,7 +2,6 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"os"
 
@@ -22,7 +21,7 @@ func main() {
 	defer logger.Info().Msg("stopped")
 	api := apiCalls.New(&logger, client, model.BaseURL, model.APIKey)
 	api.RunInSandboxMode() // to ensure it is running in sandbox mode
-	ctx := context.Background()
+	//ctx := context.Background()
 
 	/*
 		// ---------------CreateVirtualAccount---------------
@@ -56,12 +55,12 @@ func main() {
 
 	// ---------------GetBillVendors---------------
 
-	vendors, err := api.GetBillVendors(ctx, string(model.BillCategoryElectricity))
-	if err != nil {
-		logger.Err(err).Msg("failed")
-		return
-	}
-	logger.Info().Interface("response", vendors).Msg("success")
+	//vendors, err := api.GetBillVendors(ctx, string(model.BillCategoryElectricity))
+	//if err != nil {
+	//	logger.Err(err).Msg("failed")
+	//	return
+	//}
+	//logger.Info().Interface("response", vendors).Msg("success")
 
 	/*
 		// ---------------GetBillVendorByID---------------

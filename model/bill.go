@@ -73,7 +73,7 @@ type (
 		ID                   string          `mapstructure:"id,omitempty" json:"id,omitempty"`
 		Amount               string          `mapstructure:"amount,omitempty" json:"amount,omitempty"`
 		Vendor               Vendor          `mapstructure:"vendor,omitempty" json:"vendor,omitempty"`
-		BillCategory         BillCategory    `mapstructure:"billCategory,omitempty" json:"billCategory,omitempty"`
+		Category             BillCategory    `mapstructure:"category,omitempty" json:"category,omitempty"`
 		Product              Product         `mapstructure:"product,omitempty" json:"product,omitempty"`
 		Details              CustomerDetails `mapstructure:"details,omitempty" json:"details,omitempty"`
 		DebitAccountID       string          `mapstructure:"debitAccountId,omitempty" json:"debitAccountId,omitempty"`

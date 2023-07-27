@@ -14,7 +14,9 @@ import (
 
 // GetBillVendors makes the request to get bill vendors
 func (c *Call) GetBillVendors(ctx context.Context, category model.BillCategory) ([]model.Vendor, error) {
-	response := &[]model.Vendor{}
+	response := &struct {
+		Vendors []model.Vendor `json:"vendors"`
+	}{}
 
 	path := "/bills/vendors"
 
@@ -28,7 +30,7 @@ func (c *Call) GetBillVendors(ctx context.Context, category model.BillCategory) 
 		return nil, err
 	}
 
-	return *response, err
+	return response.Vendors, err
 }
 
 // GetBillVendorByID makes the request to get a bill vendor by its ID

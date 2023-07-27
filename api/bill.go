@@ -6,12 +6,15 @@ import (
 	"net/http"
 	"net/url"
 
+	"github.com/google/go-querystring/query"
+	"github.com/rs/zerolog/log"
+
 	"github.com/sendlovebox/go-lenco/model"
 )
 
 // GetBillVendors makes the request to get bill vendors
-func (c *Call) GetBillVendors(ctx context.Context, category model.BillCategory) ([]*model.Vendor, error) {
-	var response []*model.Vendor
+func (c *Call) GetBillVendors(ctx context.Context, category model.BillCategory) ([]model.Vendor, error) {
+	response := &[]model.Vendor{}
 
 	path := "/bills/vendors"
 
@@ -25,7 +28,7 @@ func (c *Call) GetBillVendors(ctx context.Context, category model.BillCategory) 
 		return nil, err
 	}
 
-	return response, err
+	return *response, err
 }
 
 // GetBillVendorByID makes the request to get a bill vendor by its ID
@@ -42,8 +45,8 @@ func (c *Call) GetBillVendorByID(ctx context.Context, vendorID string) (*model.V
 }
 
 // GetBillProducts makes the request to get products
-func (c *Call) GetBillProducts(ctx context.Context, vendorID *string, category *model.BillCategory) ([]*model.Product, error) {
-	var response []*model.Product
+func (c *Call) GetBillProducts(ctx context.Context, vendorID *string, category *model.BillCategory) ([]model.Product, error) {
+	response := &[]model.Product{}
 
 	path := "/bills/products"
 	params := url.Values{}
@@ -63,7 +66,7 @@ func (c *Call) GetBillProducts(ctx context.Context, vendorID *string, category *
 		return nil, err
 	}
 
-	return response, err
+	return *response, err
 }
 
 // GetBillProductByID makes the request to get a product by its ID
@@ -80,8 +83,8 @@ func (c *Call) GetBillProductByID(ctx context.Context, productID string) (*model
 }
 
 // RunCustomerLookup makes the request to run customer look up for a bill
-func (c *Call) RunCustomerLookup(ctx context.Context, customerID string, productID string) (*model.Product, error) {
-	response := &model.Product{}
+func (c *Call) RunCustomerLookup(ctx context.Context, customerID string, productID string) (*model.CustomerDetails, error) {
+	response := &model.CustomerDetails{}
 
 	path := fmt.Sprintf("/bills/lookup-account?customerId=%s&productId=%s", customerID, productID)
 
@@ -137,52 +140,24 @@ func (c *Call) GetBillByReference(ctx context.Context, reference string) (*model
 }
 
 // GetAllBills makes the request to get all bills
-func (c *Call) GetAllBills(ctx context.Context, request model.GetAllBillsRequest) ([]*model.BillData, error) {
+func (c *Call) GetAllBills(ctx context.Context, request model.GetAllBillsRequest) ([]model.BillData, error) {
 
-	var response []*model.BillData
+	response := &[]model.BillData{}
 
 	path := "/bills"
 
-	params := url.Values{}
-
-	if request.VendorID != nil {
-		params.Set("vendorIds[]", *request.VendorID)
-	}
-
-	if request.ProductID != nil {
-		params.Set("vendorIds[]", *request.VendorID)
-	}
-
-	if request.CustomerID != nil {
-		params.Set("customerId", *request.CustomerID)
-	}
-
-	if request.Status != nil {
-		params.Set("status", *request.Status)
-	}
-
-	if request.Category != nil {
-		params.Set("categories[]", string(*request.Category))
-	}
-
-	if request.Page != nil {
-		params.Set("page", *request.Page)
-	}
-
-	if request.Start != nil {
-		params.Set("start", *request.Start)
-	}
-
-	if request.End != nil {
-		params.Set("end", *request.End)
+	params, err := query.Values(request)
+	if err != nil {
+		log.Info().Msg("invalid query params")
+		return nil, model.ErrNetworkError
 	}
 
 	requestPath := fmt.Sprintf("%s?%s", path, params.Encode())
 
-	err := c.makeRequest(ctx, http.MethodGet, requestPath, nil, response)
+	err = c.makeRequest(ctx, http.MethodGet, requestPath, nil, response)
 	if err != nil {
 		return nil, err
 	}
 
-	return response, err
+	return *response, err
 }

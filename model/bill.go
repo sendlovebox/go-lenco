@@ -40,6 +40,7 @@ type (
 		Data    CustomerDetails `mapstructure:"data,omitempty" json:"data,omitempty"`
 	}
 
+	// CreateBillRequest payload schema for making a bill request
 	CreateBillRequest struct {
 		CustomerID     string `json:"customerId,omitempty"`
 		DebitAccountID string `json:"debitAccountId,omitempty"`
@@ -48,23 +49,26 @@ type (
 		Reference      string `json:"reference,omitempty"`
 	}
 
+	// GetAllBillsRequest schema
 	GetAllBillsRequest struct {
-		CustomerID *string       `json:"customerId,omitempty"`
-		ProductID  *string       `json:"productId,omitempty"`
-		VendorID   *string       `json:"vendorId,omitempty"`
-		Status     *string       `json:"status,omitempty"`
-		Category   *BillCategory `json:"category,omitempty"`
-		Start      *string       `json:"start,omitempty"`
-		End        *string       `json:"end,omitempty"`
-		Page       *string       `json:"page,omitempty"`
+		CustomerID string       `url:"customerId,omitempty"`
+		ProductID  string       `url:"productId,omitempty"`
+		VendorID   string       `url:"vendorIds[],omitempty"`
+		Status     string       `url:"status,omitempty"`
+		Category   BillCategory `url:"categories[],omitempty"`
+		Start      string       `url:"start,omitempty"`
+		End        string       `url:"end,omitempty"`
+		Page       string       `url:"page,omitempty"`
 	}
 
+	// CreateBillResponse schema
 	CreateBillResponse struct {
 		Status  interface{} `mapstructure:"status,omitempty" json:"status,omitempty"`
 		Message string      `mapstructure:"message,omitempty" json:"message,omitempty"`
 		Data    BillData    `mapstructure:"data,omitempty" json:"data,omitempty"`
 	}
 
+	// BillData schema
 	BillData struct {
 		ID                   string          `mapstructure:"id,omitempty" json:"id,omitempty"`
 		Amount               string          `mapstructure:"amount,omitempty" json:"amount,omitempty"`
@@ -86,8 +90,10 @@ type (
 
 	// VirtualAccountType string representation of virtual account type
 	VirtualAccountType string
-	AmountType         string
-	BillCategory       string
+	// AmountType string representation of amount type
+	AmountType string
+	// BillCategory string representation of bill category
+	BillCategory string
 )
 
 const (

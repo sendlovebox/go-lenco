@@ -53,16 +53,14 @@ func main() {
 		logger.Info().Interface("response", virtualAcc).Msg("success")
 	*/
 
-	/*
-		// ---------------GetBillVendors---------------
+	// ---------------GetBillVendors---------------
 
-		vendors, err := api.GetBillVendors(ctx, string(model.BillCategoryElectricity))
-		if err != nil {
-			logger.Err(err).Msg("failed")
-			return
-		}
-		logger.Info().Interface("response", vendors).Msg("success")
-	*/
+	//vendors, err := api.GetBillVendors(ctx, string(model.BillCategoryElectricity))
+	//if err != nil {
+	//	logger.Err(err).Msg("failed")
+	//	return
+	//}
+	//logger.Info().Interface("response", vendors).Msg("success")
 
 	/*
 		// ---------------GetBillVendorByID---------------
@@ -148,8 +146,14 @@ func main() {
 
 	// ---------------GetAllBills---------------
 	//YYYY-MM-DD
-	//bills, err := api.GetAllBills(ctx, model.GetAllBillsRequest{Status: "successful", VendorID: "bfa5206c-6122-448b-adfd-b8b764bfa13f", Category: "cable-tv", Start: "2021-01-01", End: "2023-07-23"})
-	//
+	//bills, err := api.GetAllBills(ctx, model.GetAllBillsRequest{
+	//	Status:   "successful",
+	//	VendorID: "bfa5206c-6122-448b-adfd-b8b764bfa13f",
+	//	Category: "cable-tv",
+	//	//Start: "2021-01-01",
+	//	//End: "2023-07-23"
+	//})
+
 	//if err != nil {
 	//	logger.Err(err).Msg("failed")
 	//	return

@@ -10,8 +10,8 @@ import (
 )
 
 // GetBillVendors makes the request to get bill vendors
-func (c *Call) GetBillVendors(ctx context.Context, category string) (*[]model.Vendor, error) {
-	response := &[]model.Vendor{}
+func (c *Call) GetBillVendors(ctx context.Context, category string) ([]*model.Vendor, error) {
+	var response []*model.Vendor
 
 	path := "/bills/vendors"
 
@@ -42,8 +42,8 @@ func (c *Call) GetBillVendorByID(ctx context.Context, vendorID string) (*model.V
 }
 
 // GetBillProducts makes the request to get products
-func (c *Call) GetBillProducts(ctx context.Context, vendorID, category *string) (*[]model.Product, error) {
-	response := &[]model.Product{}
+func (c *Call) GetBillProducts(ctx context.Context, vendorID, category *string) ([]*model.Product, error) {
+	var response []*model.Product
 
 	path := "/bills/products"
 	params := url.Values{}
@@ -137,9 +137,9 @@ func (c *Call) GetBillByReference(ctx context.Context, reference string) (*model
 }
 
 // GetAllBills makes the request to get all bills
-func (c *Call) GetAllBills(ctx context.Context, request model.GetAllBillsRequest) (*[]model.BillData, error) {
+func (c *Call) GetAllBills(ctx context.Context, request model.GetAllBillsRequest) ([]*model.BillData, error) {
 
-	response := &[]model.BillData{}
+	var response []*model.BillData
 
 	path := "/bills"
 

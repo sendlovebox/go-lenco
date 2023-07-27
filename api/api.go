@@ -22,15 +22,15 @@ type RemoteCalls interface {
 	GetVirtualAccountByBVN(ctx context.Context, bvn string) (*model.VirtualAccount, error)
 	GetVirtualAccountTransaction(ctx context.Context, txID string) (*model.Transaction, error)
 
-	GetBillVendors(ctx context.Context, category string) (*[]model.Vendor, error)
+	GetBillVendors(ctx context.Context, category string) ([]*model.Vendor, error)
 	GetBillVendorByID(ctx context.Context, vendorID string) (*model.Vendor, error)
-	GetBillProducts(ctx context.Context, vendorID, category *string) (*[]model.Product, error)
+	GetBillProducts(ctx context.Context, vendorID, category *string) ([]*model.Product, error)
 	GetBillProductByID(ctx context.Context, productID string) (*model.Product, error)
 	RunCustomerLookup(ctx context.Context, customerID string, productID string) (*model.Product, error)
 	CreateBill(ctx context.Context, request model.CreateBillRequest) (*model.CreateBillResponse, error)
 	GetBillByID(ctx context.Context, id string) (*model.BillData, error)
 	GetBillByReference(ctx context.Context, reference string) (*model.BillData, error)
-	GetAllBills(ctx context.Context, request model.GetAllBillsRequest) (*[]model.BillData, error)
+	GetAllBills(ctx context.Context, request model.GetAllBillsRequest) ([]*model.BillData, error)
 }
 
 // Call object

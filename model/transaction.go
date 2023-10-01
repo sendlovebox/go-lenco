@@ -3,21 +3,21 @@ package model
 type (
 	// Transaction object schema
 	Transaction struct {
-		ID                   string          `json:"id"`
-		Amount               string          `json:"amount"`
-		Fee                  string          `json:"fee"`
-		Narration            string          `json:"narration"`
-		Type                 string          `json:"type"`
-		InitiatedAt          *string         `json:"initiatedAt,omitempty"`
-		CompletedAt          *string         `json:"completedAt,omitempty"`
-		FailedAt             *string         `json:"failedAt,omitempty"`
-		AccountID            string          `json:"accountId"`
-		Details              *BankAccount    `json:"details,omitempty"`
-		VirtualAccount       *VirtualAccount `json:"virtualAccount,omitempty"`
-		Status               string          `json:"status"`
-		ReasonForFailure     string          `json:"reasonForFailure"`
-		ClientReference      string          `json:"clientReference"`
-		TransactionReference string          `json:"transactionReference"`
-		NipSessionID         *string         `json:"nipSessionId,omitempty"`
+		ID                   string         `json:"id" mapstructure:""`
+		TransactionAmount    string         `json:"transactionAmount" mapstructure:""`
+		Fee                  string         `json:"fee" mapstructure:""`
+		StampDuty            string         `json:"stampDuty" mapstructure:""`
+		SettledAmount        string         `json:"settledAmount" mapstructure:""`
+		Currency             string         `json:"currency" mapstructure:""`
+		Type                 string         `json:"type" mapstructure:""`
+		Status               string         `json:"status" mapstructure:""`
+		Narration            string         `json:"narration" mapstructure:""`
+		Details              BankAccount    `json:"details" mapstructure:""`
+		VirtualAccount       VirtualAccount `json:"virtualAccount" mapstructure:""`
+		AccountReference     string         `json:"accountReference" mapstructure:""`
+		SettledAccountID     string         `json:"settledAccountId" mapstructure:""`
+		Datetime             string         `json:"datetime" mapstructure:""`
+		NipSessionID         string         `json:"nipSessionId" mapstructure:""`
+		TransactionReference string         `json:"transactionReference" mapstructure:""`
 	}
 )

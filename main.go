@@ -63,6 +63,7 @@ func main() {
 	//logger.Info().Interface("response", vendors).Msg("success")
 
 	/*
+
 		// ---------------GetBillVendorByID---------------
 		vendor, err := api.GetBillVendorByID(ctx, "f46c9b9f-ddc1-4466-9cf2-dda59d18b84f")
 		if err != nil {
@@ -74,6 +75,7 @@ func main() {
 	*/
 
 	/*
+
 		// ---------------GetBillProducts---------------
 		products, err := api.GetBillProducts(ctx, "", "")
 		if err != nil {
@@ -153,11 +155,21 @@ func main() {
 	//	//Start: "2021-01-01",
 	//	//End: "2023-07-23"
 	//})
-
 	//if err != nil {
 	//	logger.Err(err).Msg("failed")
 	//	return
 	//}
 	//logger.Info().Interface("response", bills).Msg("success")
+	//
+	//fmt.Printf("-----------%v--------", len(bills))
 
+	// ---------------GetVirtualAccountTransaction---------------
+	/*
+		virtualAccTrx, err := api.GetVirtualAccountTransaction(context.Background(), "72754087-7caa-4a57-9e77-d8b22c89e799")
+		if err != nil {
+			logger.Err(err).Msg("failed")
+			return
+		}
+		logger.Info().Interface("response", virtualAccTrx).Msg("success")
+	*/
 }

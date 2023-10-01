@@ -48,8 +48,8 @@ type (
 const (
 	// VirtualAccountTypeStatic string representation of static virtual account
 	VirtualAccountTypeStatic VirtualAccountType = "Static Virtual Account"
-	// DynamicAccountTypeStatic string representation of dynamic virtual account
-	DynamicAccountTypeStatic VirtualAccountType = "Dynamic Virtual Account"
+	// VirtualAccountTypeDynamic string representation of dynamic virtual account
+	VirtualAccountTypeDynamic VirtualAccountType = "Dynamic Virtual Account"
 
 	// StatusActive string
 	StatusActive = "active"

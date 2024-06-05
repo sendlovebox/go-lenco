@@ -13,7 +13,7 @@ import (
 )
 
 func main() {
-	fmt.Println("Running lenco SDK")
+	fmt.Println("Running Lenco SDK")
 	_ = os.Setenv("TZ", "Africa/Lagos")
 	logger := zerolog.New(os.Stderr).With().Timestamp().Logger()
 	client := resty.New()
@@ -171,5 +171,90 @@ func main() {
 			return
 		}
 		logger.Info().Interface("response", virtualAccTrx).Msg("success")
+	*/
+
+	/*
+		// ---------------CreateRecipient---------------
+		recipient, err := api.CreateRecipient(ctx, model.CreateRecipientRequest{
+			AccountNumber: "8094656624",
+			BankCode:      "100004",
+		})
+		if err != nil {
+			logger.Err(err).Msg("failed")
+			return
+		}
+		logger.Info().Interface("response", recipient).Msg("success")
+
+	*/
+
+	/*
+		// ---------------GetRecipient---------------
+		recipient, err := api.GetRecipient(ctx, "d3597405-bfad-4f8c-b277-86355a7c555e")
+		if err != nil {
+			logger.Err(err).Msg("failed")
+			return
+		}
+		logger.Info().Interface("response", recipient).Msg("success")
+	*/
+
+	/*
+		// ---------------GetRecipients---------------
+		recipients, err := api.GetRecipients(ctx)
+		if err != nil {
+			logger.Err(err).Msg("failed")
+			return
+		}
+		logger.Info().Interface("response", recipients).Msg("success")
+	*/
+
+	/*
+		// ---------------CreateTransaction---------------
+		// recipientID := "d3597405-bfad-4f8c-b277-86355a7c555e"
+		accountNumber := "8094656624"
+		bankCode := "100004"
+		transaction, err := api.CreateTransaction(ctx, model.CreateTransactionRequest{
+			AccountID: "431827e5-8f9f-4340-ad37-d07185403b8b",
+			//RecipientID: &recipientID,
+			AccountNumber: &accountNumber,
+			BankCode:      &bankCode,
+			Amount:        "3000",
+			Narration:     "testing",
+			Reference:     "44497e5-8f9f-4340-ad37-d07185403b8d",
+		})
+		if err != nil {
+			logger.Err(err).Msg("failed")
+			return
+		}
+		logger.Info().Interface("response", transaction).Msg("success")
+	*/
+
+	/*
+		// ---------------GetTransactionByID---------------
+		transaction, err := api.GetTransactionByID(ctx, "8f81b7bb-02db-4ce2-9a38-e7fa135cf099")
+		if err != nil {
+			logger.Err(err).Msg("failed")
+			return
+		}
+		logger.Info().Interface("response", transaction).Msg("success")
+	*/
+
+	/*
+		// ---------------GetTransactionByReference---------------
+		transaction2, err := api.GetTransactionByReference(ctx, "44497e5-8f9f-4340-ad37-d07185403b8d")
+		if err != nil {
+			logger.Err(err).Msg("failed")
+			return
+		}
+		logger.Info().Interface("response", transaction2).Msg("success")
+	*/
+
+	/*
+		// ---------------GetTransactions---------------
+		transactions, err := api.GetTransactions(ctx)
+		if err != nil {
+			logger.Err(err).Msg("failed")
+			return
+		}
+		logger.Info().Interface("response", transactions).Msg("success")
 	*/
 }

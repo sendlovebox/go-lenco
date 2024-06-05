@@ -22,8 +22,10 @@ var (
 type (
 	// Response schema for all endpoints
 	Response struct {
-		Status  bool        `json:"status"`
-		Message string      `json:"message"`
-		Data    interface{} `json:"data"`
+		Status    bool        `json:"status"`
+		Message   string      `json:"message"`
+		ErrorCode *string     `json:"errorCode,omitempty"`
+		Errors    interface{} `json:"errors,omitempty"`
+		Data      interface{} `json:"data"`
 	}
 )

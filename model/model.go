@@ -11,7 +11,7 @@ const (
 	// BaseURL to for woven finance
 	BaseURL = "https://sandbox.lenco.co/access/v1"
 	// APIKey for authorization
-	APIKey = "bf307db1fcb4749120b81470eff89961367c8760f904d8dffcfa78d633d23e67"
+	APIKey = ""
 )
 
 var (

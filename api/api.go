@@ -31,6 +31,15 @@ type RemoteCalls interface {
 	GetBillByID(ctx context.Context, id string) (*model.BillData, error)
 	GetBillByReference(ctx context.Context, reference string) (*model.BillData, error)
 	GetAllBills(ctx context.Context, request model.GetAllBillsRequest) ([]model.BillData, error)
+
+	CreateRecipient(ctx context.Context, request model.CreateRecipientRequest) (*model.RecipientResponse, error)
+	GetRecipient(ctx context.Context, id string) (*model.RecipientResponse, error)
+	GetRecipients(ctx context.Context) (*model.RecipientsResponse, error)
+
+	CreateTransaction(ctx context.Context, request model.CreateTransactionRequest) (*model.TransactionResponse, error)
+	GetTransactionByID(ctx context.Context, id string) (*model.TransactionResponse, error)
+	GetTransactionByReference(ctx context.Context, reference string) (*model.TransactionResponse, error)
+	GetTransactions(ctx context.Context) (*model.TransactionsResponse, error)
 }
 
 // Call object

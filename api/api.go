@@ -27,7 +27,7 @@ type RemoteCalls interface {
 	GetBillProducts(ctx context.Context, vendorID *string, category *model.BillCategory) ([]model.Product, error)
 	GetBillProductByID(ctx context.Context, productID string) (*model.Product, error)
 	RunCustomerLookup(ctx context.Context, customerID string, productID string) (*model.CustomerDetails, error)
-	CreateBill(ctx context.Context, request model.CreateBillRequest) (*model.CreateBillResponse, error)
+	CreateBill(ctx context.Context, request model.CreateBillRequest) (*model.BillData, error)
 	GetBillByID(ctx context.Context, id string) (*model.BillData, error)
 	GetBillByReference(ctx context.Context, reference string) (*model.BillData, error)
 	GetAllBills(ctx context.Context, request model.GetAllBillsRequest) ([]model.BillData, error)
@@ -52,7 +52,7 @@ type Call struct {
 
 // New initialises the object Call
 func New(z *zerolog.Logger, c *resty.Client, baseURL, token string) RemoteCalls {
-	c.SetTimeout(10 * time.Second)
+	c.SetTimeout(60 * time.Second)
 	call := &Call{
 		client:  c,
 		logger:  z.With().Str("sdk", "lenco").Logger(),

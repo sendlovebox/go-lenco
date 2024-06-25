@@ -36,10 +36,10 @@ func (m *MockRemoteCalls) EXPECT() *MockRemoteCallsMockRecorder {
 }
 
 // CreateBill mocks base method.
-func (m *MockRemoteCalls) CreateBill(ctx context.Context, request model.CreateBillRequest) (*model.CreateBillResponse, error) {
+func (m *MockRemoteCalls) CreateBill(ctx context.Context, request model.CreateBillRequest) (*model.BillData, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateBill", ctx, request)
-	ret0, _ := ret[0].(*model.CreateBillResponse)
+	ret0, _ := ret[0].(*model.BillData)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

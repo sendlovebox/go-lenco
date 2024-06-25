@@ -56,6 +56,12 @@ func (c *Call) makeRequest(ctx context.Context, method, path string, body, expec
 		return err
 	}
 
+	// Handle no-content scenario
+	if res.StatusCode() == http.StatusNoContent {
+		log.Info().Msg("No content to process, request completed successfully")
+		return nil // Early return as there's no content to map
+	}
+
 	if !resp.Status {
 		err = errors.New(resp.Message)
 		log.Err(err).Msg("error while making request")

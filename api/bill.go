@@ -101,9 +101,9 @@ func (c *Call) RunCustomerLookup(ctx context.Context, customerID string, product
 }
 
 // CreateBill makes the request to create a bill
-func (c *Call) CreateBill(ctx context.Context, request model.CreateBillRequest) (*model.CreateBillResponse, error) {
+func (c *Call) CreateBill(ctx context.Context, request model.CreateBillRequest) (*model.BillData, error) {
 
-	response := &model.CreateBillResponse{}
+	response := &model.BillData{}
 
 	err := c.makeRequest(ctx, http.MethodPost, "/bills", request, response)
 	if err != nil {

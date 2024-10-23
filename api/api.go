@@ -36,6 +36,8 @@ type RemoteCalls interface {
 	GetRecipient(ctx context.Context, id string) (*model.RecipientResponse, error)
 	GetRecipients(ctx context.Context) (*model.RecipientsResponse, error)
 
+	ResolveAccount(ctx context.Context, bankCode, accountNumber string) (*model.ResolveAccountResponse, error)
+
 	CreateTransaction(ctx context.Context, request model.CreateTransactionRequest) (*model.TransactionResponse, error)
 	GetTransactionByID(ctx context.Context, id string) (*model.TransactionResponse, error)
 	GetTransactionByReference(ctx context.Context, reference string) (*model.TransactionResponse, error)

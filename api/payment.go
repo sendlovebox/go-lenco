@@ -84,3 +84,14 @@ func (c *Call) GetTransactions(ctx context.Context) (*model.TransactionsResponse
 	}
 	return response, err
 }
+
+// ResolveAccount makes the request to resolve account
+func (c *Call) ResolveAccount(ctx context.Context, bankCode, accountNumber string) (*model.ResolveAccountResponse, error) {
+	response := &model.ResolveAccountResponse{}
+
+	err := c.makeRequest(ctx, http.MethodGet, fmt.Sprintf("/resolve?accountNumber=%s&bankCode=%s", accountNumber, bankCode), nil, response)
+	if err != nil {
+		return nil, err
+	}
+	return response, err
+}

@@ -55,7 +55,7 @@ func main() {
 
 	// ---------------GetBillVendors---------------
 
-	//vendors, err := api.GetBillVendors(ctx, string(model.BillCategoryElectricity))
+	//vendors, err := api.GetBillVendors(ctx, model.BillCategoryElectricity)
 	//if err != nil {
 	//	logger.Err(err).Msg("failed")
 	//	return
@@ -84,6 +84,16 @@ func main() {
 		}
 		logger.Info().Interface("response", products).Msg("success")
 
+	*/
+
+	/*
+		// ---------------ResolveAccount---------------
+		resolveDetails, err := api.ResolveAccount(ctx, "100004", "8094656624")
+		if err != nil {
+			logger.Err(err).Msg("failed")
+			return
+		}
+		logger.Info().Interface("response", resolveDetails).Msg("success")
 	*/
 
 	/*

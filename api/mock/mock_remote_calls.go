@@ -320,6 +320,21 @@ func (mr *MockRemoteCallsMockRecorder) GetVirtualAccountTransaction(ctx, txID in
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetVirtualAccountTransaction", reflect.TypeOf((*MockRemoteCalls)(nil).GetVirtualAccountTransaction), ctx, txID)
 }
 
+// ResolveAccount mocks base method.
+func (m *MockRemoteCalls) ResolveAccount(ctx context.Context, bankCode, accountNumber string) (*model.ResolveAccountResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ResolveAccount", ctx, bankCode, accountNumber)
+	ret0, _ := ret[0].(*model.ResolveAccountResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ResolveAccount indicates an expected call of ResolveAccount.
+func (mr *MockRemoteCallsMockRecorder) ResolveAccount(ctx, bankCode, accountNumber interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ResolveAccount", reflect.TypeOf((*MockRemoteCalls)(nil).ResolveAccount), ctx, bankCode, accountNumber)
+}
+
 // RunCustomerLookup mocks base method.
 func (m *MockRemoteCalls) RunCustomerLookup(ctx context.Context, customerID, productID string) (*model.CustomerDetails, error) {
 	m.ctrl.T.Helper()

@@ -50,6 +50,16 @@ type (
 		NipSessionID         interface{}  `json:"nipSessionId"`
 	}
 
+	// ResolveAccountResponse schema
+	ResolveAccountResponse struct {
+		AccountName   string `json:"accountName"`
+		AccountNumber string `json:"accountNumber"`
+		Bank          struct {
+			Code string `json:"code"`
+			Name string `json:"name"`
+		} `json:"bank"`
+	}
+
 	// TransactionsResponse schema
 	TransactionsResponse struct {
 		Transactions []TransactionResponse `json:"transactions"`
